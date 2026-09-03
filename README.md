@@ -2,20 +2,27 @@
 
 Personal portfolio for Justice Adioha, Android & Kotlin Multiplatform Developer.
 
+## Portfolio focus
+
+The portfolio presents EasyGetApp honestly as an active development project. The strongest current product area is the Taxi / Ride Dispatcher, with customer and driver workflows demonstrated through screenshots and a customer-side video demo.
+
+The portfolio also presents the types of custom MVPs I can build for clients, including transportation, delivery, marketplace/ordering and booking/service applications. These are service offerings, not claims that every listed product is already finished inside EasyGetApp.
+
 ## Local preview
 
 Open `index.html` in a browser.
 
 ## GitHub Pages
 
-Create a GitHub repository and upload `index.html` and `style.css`.
-Then enable GitHub Pages from the repository's Pages settings.
+Upload the complete project, including the `assets` folder and the customer-side demo video, to your GitHub repository. Then enable GitHub Pages from the repository's Pages settings.
+
+## Included media
+
+- EasyGetApp screenshots in `assets/`
+- Customer-side demo video: `assets/ClientSide-Demo.mp4`
 
 ## Before publishing
 
-Replace:
-- GitHub placeholder link
-- LinkedIn placeholder link
-- EasyGetApp screenshot placeholder
+Check that your GitHub and LinkedIn URLs are correct and that the phone number and email address are the contact details you want publicly displayed.
 
-Add real project screenshots and your actual GitHub/LinkedIn URLs.
+If a driver-side demo video is added later, place it in `assets/` and add a second video block to `index.html` rather than claiming that a driver video exists when it has not been uploaded.
