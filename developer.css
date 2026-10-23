@@ -1,0 +1,29 @@
+
+.developer-hero{background:var(--navy);color:#fff;padding:95px 0 105px}.developer-hero-grid{display:grid;grid-template-columns:1.3fr .7fr;gap:70px;align-items:center}.developer-hero h1{font-size:clamp(68px,9vw,124px);line-height:.99;letter-spacing:-7px;margin:28px 0 20px}.developer-hero h1 em{font-style:normal;color:var(--mint)}.developer-role{color:#fff;font-size:18px;font-weight:750}.developer-intro{max-width:660px;color:#afc3d0;line-height:1.9;font-size:16px}.dev-hero-card{background:#193244;border:1px solid #35556a;border-radius:22px;padding:40px 34px;display:flex;flex-direction:column;gap:25px;box-shadow:15px 20px 60px #0003}.dev-hero-card>span,.dev-project-kicker{color:#71bd9e;letter-spacing:2px;font-size:11px;font-weight:900}.dev-hero-card>strong{font-size:32px;line-height:1.2;letter-spacing:-1.5px}.dev-stack,.dev-pills{display:flex;flex-wrap:wrap;gap:8px}.dev-stack b,.dev-pills span{padding:8px 10px;border-radius:6px;font-size:11px;background:#2a4b50;color:#d8f5e6}.dev-hero-card small{color:#a7b7c4}.dev-section{background:#f7f8f5}.dev-project{display:grid;grid-template-columns:1.2fr .8fr;gap:50px;align-items:center;background:white;border:1px solid #e1e9e3;border-radius:20px;margin-top:35px;padding:45px}.dev-project h3{font-size:44px;letter-spacing:-2px;margin:12px 0}.dev-project p{max-width:620px;color:#62717c;line-height:1.9}.dev-pills span{background:#e9f4ed;color:#215f4b}.dev-link,.dev-original{display:inline-block;color:#116e53;font-weight:850;margin-top:26px}.dev-project-art{display:flex;align-items:center;flex-direction:column;gap:14px}.dev-project-art img{height:390px;max-width:100%;object-fit:contain;border-radius:15px;box-shadow:0 12px 28px #0002}.dev-project-art small{color:#77857d;font-size:10px}.dev-project-fitness{background:#edf5ed}.dev-fitness-art{min-height:250px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:20px;color:#397e62;font-weight:750}.dev-ring{height:190px;width:190px;border-radius:50%;background:conic-gradient(#228b67 0 76%,#c6decf 76%);display:flex;align-items:center;justify-content:center;flex-direction:column;border:23px solid #d5f1e1;box-shadow:0 0 0 15px #a2d9bb}.dev-ring strong{font-size:57px;line-height:1}.dev-ring small{font-size:9px;letter-spacing:1.2px}.dev-demo-section{background:#eaf0eb}.dev-demo-lead{max-width:740px;color:#60736b}.dev-demo-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;margin-top:35px}.dev-demo-card{background:#fff;border-radius:18px;overflow:hidden;border:1px solid #d7e4db}.dev-video{background:#102a32;display:flex;justify-content:center;align-items:center;padding:20px;min-height:470px}.dev-video video{height:480px;width:auto;max-width:100%;object-fit:contain;border-radius:12px;background:#050a0d}.dev-demo-caption{padding:22px 26px}.dev-demo-caption span{color:#188461;font-size:10px;font-weight:900;letter-spacing:1.5px}.dev-demo-caption h3{margin:8px 0;font-size:22px}.dev-demo-caption p{margin:0;color:#697981;font-size:13px}.dev-skill-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:35px}.dev-skill-grid article{background:white;border:1px solid #dce6df;border-radius:14px;padding:27px}.dev-skill-grid h3{font-size:19px}.dev-skill-grid p{color:#62717c;font-size:13px;line-height:1.9}
+@media(max-width:900px){.developer-hero-grid,.dev-project{grid-template-columns:1fr}.dev-hero-card{max-width:540px}.dev-skill-grid{grid-template-columns:1fr}.developer-hero h1{letter-spacing:-4px}.dev-project-art img{height:320px}}
+@media(max-width:650px){.developer-hero{padding:60px 0}.dev-demo-grid{grid-template-columns:1fr}.dev-video{min-height:0}.dev-video video{height:410px}.dev-project{padding:25px}.dev-project h3{font-size:36px}.developer-hero h1{font-size:68px}}
+
+/* Accessible, sharp FitnessApp artwork. No percentage or completion claim. */
+.dev-fitness-art{min-height:310px;gap:0}
+.fitness-illustration{display:block;width:min(100%,340px);height:auto;overflow:visible}
+.fitness-illustration-caption{font-size:15px;font-weight:800;letter-spacing:.01em;text-align:center;margin-top:-4px;color:#286f54}
+.fitness-illustration-caption b{color:#69aa89;padding:0 4px}
+@media(max-width:650px){.dev-fitness-art{min-height:265px}.fitness-illustration{max-width:290px}}
+
+.implementation-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:30px}
+.implementation-grid article,.dev-process-grid article{background:#fff;border:1px solid #dce6df;border-radius:16px;padding:28px}
+.implementation-grid h3{margin:0 0 15px;color:#193d32;font-size:21px}
+.implementation-grid ul{padding-left:21px;color:#63717a;line-height:1.85;font-size:14px}
+.implementation-grid li+li{margin-top:8px}
+.dev-gallery-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:16px;margin-top:32px}
+.dev-gallery-grid figure{margin:0;background:#fff;border:1px solid #dce6df;border-radius:15px;padding:12px;min-width:0}
+.dev-gallery-grid a{display:block;overflow:hidden;border-radius:10px;background:#e9f2ec}
+.dev-gallery-grid img{display:block;width:100%;height:auto;aspect-ratio:9/16;object-fit:cover;transition:transform .2s}
+.dev-gallery-grid a:hover img{transform:scale(1.04)}
+.dev-gallery-grid figcaption{font-size:12px;color:#63717a;margin-top:10px}
+.dev-process-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:15px;margin-top:30px}
+.dev-process-grid b{color:#188461;font-size:12px}
+.dev-process-grid h3{margin:15px 0 6px;font-size:19px}
+.dev-process-grid p{font-size:13px;color:#63717a;line-height:1.8;margin:0}
+@media(max-width:900px){.dev-gallery-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.dev-process-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:650px){.implementation-grid{grid-template-columns:1fr}.dev-gallery-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.dev-gallery-grid figure{padding:8px}.dev-process-grid{grid-template-columns:1fr}}

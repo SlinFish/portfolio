@@ -1,0 +1,23 @@
+SlinFish Software — two-page portfolio update
+
+The ZIP contains these four website files:
+- index.html (business homepage)
+- developer.html (technical developer portfolio)
+- style.css (shared business design)
+- developer.css (developer-specific styles)
+
+Publish to the EXISTING GitHub repository: SlinFish/portfolio
+1. Open https://github.com/SlinFish/portfolio
+2. Choose Add file > Upload files.
+3. Upload ONLY the four website files above, at the repository ROOT (not inside a subfolder).
+4. GitHub should offer to replace index.html and style.css; keep the existing assets/ folder intact.
+5. Commit changes to main (or create a PR and merge).
+6. Check GitHub Pages:
+   https://slinfish.github.io/portfolio/
+   https://slinfish.github.io/portfolio/developer.html
+7. Check both demo videos, all ten screenshots, navigation and email/WhatsApp links.
+
+Important: Do not delete the existing assets/ folder. Both pages reference its existing screenshots and demo videos.
+Telegram has been omitted until a verified Telegram username/link is supplied.
+FitnessApp has no "In Development" badge, but it is not represented as a commercially deployed app.
+The illustration is a clear 28-day PROGRAM graphic, not a percentage of user progress.
