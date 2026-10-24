@@ -1,74 +1,55 @@
-# SlinFish Software — website inquiry form maintenance
+# SlinFish Software — inquiry form maintenance
 
-Last updated: 2026-10-24
+Updated: 2026-10-24
 
-## Purpose and implementation
-The public business site is a static GitHub Pages website at https://slinfish.github.io/portfolio/. The source is in this repository. The inquiry form lives in `index.html` under `#contact`, with styles in `style.css`.
+## Production integration
+- Website: https://slinfish.github.io/portfolio/#contact
+- Repository: `SlinFish/portfolio`
+- Form markup and JavaScript: `index.html`, form ID `project-inquiry`
+- Responsive styling: `style.css`
+- Form provider: **Formspree** (https://formspree.io/)
+- Form name: **SlinFish Project Inquiry**
+- Form endpoint (public): `https://formspree.io/f/mljjdeyz`
+- Recipient email configured by account owner: `slinfishsoftware@gmail.com`
+- Hosting: GitHub Pages; no backend server in this repository.
 
-The initial version opened a visitor's email app using `mailto:`, which was unsuitable for visitors without an email client configured. It has been replaced with a direct AJAX submission to **FormSubmit.co** (not FormSubmit.io or FormSubmit.app).
+## Submission behavior
+The browser validates required fields and posts `FormData` using `fetch` to Formspree with `Accept: application/json`. The submit button is disabled while sending. Only a successful HTTP response with a recognized success value results in a success message; errors show a failure message. No redirect to Apple Mail is required.
 
-- Endpoint: `https://formsubmit.co/ajax/slinfishsoftware@gmail.com`
-- Recipient: `slinfishsoftware@gmail.com`
-- Frontend: vanilla JavaScript `fetch`, no build tools or additional dependencies
-- Form fields: name, email, company (optional), service, budget, timeline, project details
-- Anti-spam: `_honey` honeypot; provider-side spam protection may also apply
-- Browser: validates required fields; disables button while sending; shows success only when the provider explicitly reports success; shows an error otherwise
-- Email and WhatsApp remain available as fallback contact methods.
+Fields: name, email, company (optional), service, budget, timeline, details. A hidden `_honey` anti-spam field is included. Formspree may have its own spam filtering; confirm provider behavior in the dashboard.
 
-## Required one-time activation — NOT YET VERIFIED
-FormSubmit requires the recipient to verify ownership of the email address before submissions are delivered.
+## Setup and verification
+1. Sign in to the Formspree account associated with `slinfishsoftware@gmail.com`.
+2. Confirm that **SlinFish Project Inquiry** exists and its recipient email is verified.
+3. Open the live website on mobile Safari and submit a clearly labeled test with a valid email address.
+4. Confirm that the website displays success and that the submission appears in Formspree's dashboard.
+5. Confirm that the notification reaches the business Gmail inbox (check Spam if necessary).
+6. Verify a test reply can be sent to the supplied sender address.
+7. Check required-field validation, narrow-screen layout, and that service/pricing quote links scroll to `#contact`.
 
-1. Open the published website at https://slinfish.github.io/portfolio/#contact.
-2. Fill in the form with **clearly labeled test data**; do not use a real prospect's details.
-3. Submit. The provider should send an **Activate Form** message to `slinfishsoftware@gmail.com`.
-4. In that inbox, find the activation email (check Spam) and click the confirmation link.
-5. Return to the site, submit another test inquiry, and verify it arrives in the business inbox.
-6. Confirm the website shows success only when the provider accepts the submission.
+**Current verification status: pending live end-to-end test.** Do not claim that customer inquiries are delivered until steps 3–5 are confirmed.
 
-**Until activation and the end-to-end test are confirmed, do not claim the form is operational or that customer inquiries are reliably delivered.** The page displays an activation-specific error when the provider reports it.
+## Troubleshooting
+- Network/cross-origin error: open https://formspree.io/ in the affected browser and check certificate trust. Test on another network if needed; do not bypass TLS warnings.
+- Provider rejection: inspect Formspree's dashboard and verify the form ID, recipient address, spam settings, and account status.
+- Unexpected response: check whether Formspree returned JSON and whether the endpoint is correct.
+- Notification missing but dashboard has the submission: check Gmail Spam and Formspree notification settings.
+- No dashboard submission: the browser request may not have reached Formspree; inspect browser developer tools or test from another device.
+- If Formspree is unavailable, keep email and WhatsApp contact links working.
 
-## Operational checks
-- On mobile Safari and desktop Chrome, open `/#contact` and check layout and required-field validation.
-- Send a test inquiry; verify email receipt and reply-to address.
-- Verify the form does **not** open Apple Mail or Gmail.
-- Confirm buttons under services and pricing scroll to `#contact`.
-- Confirm fallback email address and WhatsApp still work.
-- Check Spam and provider delivery if submissions stop arriving.
-- Do not submit passwords, payment credentials, private API keys, or other sensitive information.
+## Mobile styling
+Legacy `.contact-section` styles conflicted with the original inquiry form, producing compressed inline fields and a visible anti-spam honeypot on iPhone. More-specific `.contact-section .contact-inner .inquiry-form` CSS now forces stacked labels and a single column below 640px and hides the honeypot. Retest after CSS changes.
 
-## Failure handling
-- A network failure, unexpected JSON response, or provider rejection displays a delivery failure. It must never be treated as success.
-- FormSubmit sometimes returns HTTP 200 with `success: "false"` (a string). The code explicitly checks `String(result.success).toLowerCase() === "true"`.
-- If FormSubmit is down or blocks traffic, visitors should use the direct email or WhatsApp links.
-- Never log form contents to browser analytics or public repositories.
-- If the recipient address changes, update the AJAX endpoint and re-activate with the new address.
+## Data handling and security
+Form submissions go to a third-party provider (Formspree) and are forwarded to business email. Avoid collecting passwords, payment card details, API keys, or sensitive personal information. Review Formspree's privacy policy, retention rules, and free-plan limits periodically. Keep a visible privacy notice and alternative contact options. The endpoint is public and **not a secret**; account credentials are never committed.
 
-## Data and privacy
-Visitor submissions are sent to the third-party provider FormSubmit.co for email delivery; the site itself has no database. The provider documents a 30-day submission archive. Review the provider's terms and privacy policy before relying on it for customer data. The page warns visitors not to submit secrets. No paid plan or marketing expenditure is required for this setup.
+## Previous provider and rollback
+The initial `mailto:` submission required a configured email app. FormSubmit.co was subsequently tried but failed on mobile; Safari showed a certificate trust warning for `formsubmit.co`. Do not restore that endpoint without validating its security and connectivity.
 
-## Future improvements
-- Add a privacy notice linking to the provider's privacy policy and stating the expected use of inquiry data.
-- Evaluate a provider with domain restrictions, rate limiting, a dashboard and export if inquiry volume grows.
-- Track qualified inquiries in the SlinFish sales spreadsheet **after** human review; do not automatically add untrusted form submissions to the pipeline.
-- Consider a first-party backend later if privacy, auditability or reliability requires it.
+To roll back this integration, revert the Formspree migration PR or replace the endpoint with a tested alternative. Do not silently fall back to `mailto:` and call it a working online form.
 
-## Relevant changes
-- Original inquiry form: PR #1.
-- Remaining quote links redirected to form: PR #2.
-- AJAX provider integration and maintenance notes: this PR.
-
-## Rollback
-Revert the AJAX integration PR through GitHub if necessary; this restores the earlier `mailto:` form behavior, which is a fallback but not a fully functional online inquiry form. Prefer keeping visible direct email and WhatsApp options if the provider fails.
-
-## Reference
-Provider documentation: https://formsubmit.co/documentation and https://formsubmit.co/ajax-documentation
-
-## Mobile layout regression (2026-10-24)
-A user screenshot showed the form fields compressed into inline rows and the honeypot visible on iPhone. The cause was existing contact-section styling overriding generic `.inquiry-form` CSS selectors. A higher-specificity set of selectors scoped to `.contact-section .contact-inner .inquiry-form` now explicitly sets block inputs, stacked labels, a responsive single-column grid below 640px, and `display:none!important` for the honeypot. Do not remove this override without checking the legacy contact CSS. Check mobile Safari after future stylesheet changes. This fixes CSS only; submission still requires separate FormSubmit email activation and delivery verification.
-
-## Failed live submission diagnosis (2026-10-24)
-An iPhone screenshot showed a red generic delivery error after a test submission. Searches of the connected business Gmail inbox and Spam found no FormSubmit activation or inquiry messages. The failure cause was not conclusively established; provider activation, CORS/preflight, and provider rejection were possible.
-
-The AJAX request was updated from JSON `Content-Type: application/json` to a URL-encoded `URLSearchParams(FormData)` request with `Accept: application/json`. This is a CORS-simple POST that avoids a JSON preflight; it does **not** guarantee delivery. The page now classifies errors as activation, network/cross-origin, unexpected provider response, or provider rejection without exposing raw server messages or personal details. Never treat an unsuccessful response as delivered.
-
-**Verification required:** After GitHub Pages publishes, submit one clearly marked test from mobile. Note the exact diagnostic shown. Check business inbox and Spam for activation or test email. If no activation email arrives, consider a normal POST activation flow or a different form service after investigating the provider; do not repeatedly submit real customer information. This patch is a diagnostic improvement, not proof of operational delivery.
+## Future maintenance
+- Monitor Formspree's dashboard and Gmail for failed or spam-filtered submissions.
+- Revalidate after endpoint, email, DNS, or privacy-policy changes.
+- Log qualified inquiries manually into the commercial pipeline after reviewing them.
+- Document any future provider migration and preserve the field names for reporting.
