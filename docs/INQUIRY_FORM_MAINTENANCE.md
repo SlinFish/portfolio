@@ -62,3 +62,6 @@ Revert the AJAX integration PR through GitHub if necessary; this restores the ea
 
 ## Reference
 Provider documentation: https://formsubmit.co/documentation and https://formsubmit.co/ajax-documentation
+
+## Mobile layout regression (2026-10-24)
+A user screenshot showed the form fields compressed into inline rows and the honeypot visible on iPhone. The cause was existing contact-section styling overriding generic `.inquiry-form` CSS selectors. A higher-specificity set of selectors scoped to `.contact-section .contact-inner .inquiry-form` now explicitly sets block inputs, stacked labels, a responsive single-column grid below 640px, and `display:none!important` for the honeypot. Do not remove this override without checking the legacy contact CSS. Check mobile Safari after future stylesheet changes. This fixes CSS only; submission still requires separate FormSubmit email activation and delivery verification.
