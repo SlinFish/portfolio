@@ -74,7 +74,11 @@
 
     <section id="about" class="about-section"><div class="wrap about-grid"><div><p class="kicker">THE PERSON BEHIND THE WORK</p><h2>Small studio.<br><span>Hands-on development.</span></h2></div><div><p>SlinFish Software is an independent development studio led by <strong>Justice Adioha</strong>, an Android and Kotlin Multiplatform developer.</p><p>I work directly on the technical implementation—from application architecture and mobile UI to APIs, data and integrations. Projects are scoped according to what can realistically be delivered.</p><div class="about-links"><a href="https://github.com/SlinFish" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href="developer.html">View developer portfolio ↗</a></div></div></div></section>
 
-    <section id="contact" class="contact-section"><div class="wrap contact-inner"><p class="kicker">HAVE A PROJECT IN MIND?</p><h2>Let's build something<br><em>useful.</em></h2><p>Tell us what you're trying to solve. We'll start with the problem, then work out the right-sized solution.</p><form id="project-inquiry" class="inquiry-form" aria-label="Project inquiry">
+    <section id="contact" class="contact-section"><div class="wrap contact-inner"><p class="kicker">HAVE A PROJECT IN MIND?</p><h2>Let's build something<br><em>useful.</em></h2><p>Tell us what you're trying to solve. We'll start with the problem, then work out the right-sized solution.</p><form id="project-inquiry" class="inquiry-form" aria-label="Project inquiry" action="https://formsubmit.co/ajax/slinfishsoftware@gmail.com" method="POST">
+  <input type="hidden" name="_subject" value="New SlinFish Software project inquiry">
+  <input type="hidden" name="_template" value="table">
+  <input type="hidden" name="_url" value="https://slinfish.github.io/portfolio/#contact">
+  <div class="inquiry-honeypot" aria-hidden="true"><label>Leave this field empty <input name="_honey" tabindex="-1" autocomplete="off"></label></div>
   <div class="inquiry-grid">
     <label>Your name <input name="name" required maxlength="100" autocomplete="name" placeholder="Your name"></label>
     <label>Email address <input name="email" type="email" required maxlength="200" autocomplete="email" placeholder="you@company.com"></label>
@@ -84,21 +88,53 @@
     <label>Company (optional) <input name="company" maxlength="150" autocomplete="organization" placeholder="Company or team"></label>
   </div>
   <label>Tell us about your project <textarea name="details" rows="5" required maxlength="3000" placeholder="What isn't working, or what would you like to build?"></textarea></label>
-  <button class="btn btn-dark" type="submit">Prepare inquiry email ↗</button>
-  <p class="inquiry-note">This opens your email app with your answers. Please press Send there to submit your inquiry. No information is stored on this website.</p>
+  <button class="btn btn-dark" type="submit">Send project inquiry ↗</button>
+  <p class="inquiry-note">Your inquiry is sent securely to our form provider, FormSubmit, which forwards it to our business email. Please do not include passwords or sensitive account information.</p>
+  <p id="inquiry-status" class="inquiry-status" role="status" aria-live="polite"></p>
 </form><div class="contact-methods"><a href="tel:+85586903705" aria-label="Call SlinFish Software at +855 86 903 705">☎ Call +855 86 903 705</a><a href="https://wa.me/85586903705?text=Hello%20SlinFish%20Software%2C%20I%27d%20like%20to%20discuss%20a%20project." target="_blank" rel="noopener noreferrer">WhatsApp ↗</a></div><a class="contact-email" href="mailto:slinfishsoftware@gmail.com">slinfishsoftware@gmail.com</a></div></section>
   </main>
   <footer class="footer"><div class="wrap footer-inner"><span><strong>SlinFish</strong> Software</span><span>Independent software development studio · © 2026</span><a href="developer.html">Developer portfolio ↗</a><a href="#home">Back to top ↑</a></div></footer>
   <script>const b=document.querySelector('.menu-button');const n=document.querySelector('.nav-links');b.addEventListener('click',()=>{const o=n.classList.toggle('open');b.setAttribute('aria-expanded',String(o));});n.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{n.classList.remove('open');b.setAttribute('aria-expanded','false')}));</script>
   <script>
-  document.getElementById('project-inquiry').addEventListener('submit', function(event) {
-    event.preventDefault();
-    if (!this.reportValidity()) return;
-    const values = new FormData(this);
-    const fields = [['Name','name'],['Email','email'],['Company','company'],['Service','service'],['Budget','budget'],['Timeline','timeline'],['Project details','details']];
-    const body = fields.map(([label,key]) => label + ': ' + (values.get(key) || 'Not provided')).join('\n\n');
-    window.location.href = 'mailto:slinfishsoftware@gmail.com?subject=' + encodeURIComponent('Project inquiry — ' + values.get('service')) + '&body=' + encodeURIComponent(body);
-  });
+  (() => {
+    const form = document.getElementById('project-inquiry');
+    const status = document.getElementById('inquiry-status');
+    const button = form.querySelector('button[type="submit"]');
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      if (!form.reportValidity()) return;
+      status.textContent = '';
+      status.className = 'inquiry-status';
+      button.disabled = true;
+      button.textContent = 'Sending…';
+      try {
+        const data = Object.fromEntries(new FormData(form).entries());
+        if (data._honey) return;
+        const response = await fetch(form.action, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify(data)
+        });
+        const result = await response.json();
+        // FormSubmit may return HTTP 200 even on failure, and "false" as a string.
+        if (!response.ok || String(result.success).toLowerCase() !== 'true') {
+          throw new Error(result.message || 'Your inquiry could not be delivered.');
+        }
+        status.className = 'inquiry-status inquiry-success';
+        status.textContent = 'Thank you! Your project inquiry was submitted. We will review it and reply by email.';
+        form.reset();
+      } catch (error) {
+        status.className = 'inquiry-status inquiry-error';
+        const message = String(error.message || '');
+        status.textContent = /activation|activate form/i.test(message)
+          ? 'Our inquiry inbox is awaiting one-time activation. Please email us directly at slinfishsoftware@gmail.com until activation is complete.'
+          : 'We could not confirm delivery. Please try again later or contact slinfishsoftware@gmail.com directly.';
+      } finally {
+        button.disabled = false;
+        button.textContent = 'Send project inquiry ↗';
+      }
+    });
+  })();
   </script>
 </body>
 </html>
