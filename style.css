@@ -23,3 +23,10 @@
 .inquiry-form button{border:0;cursor:pointer}
 .inquiry-note{font-size:12px!important;color:#4c6e60!important;margin:14px 0 0!important;max-width:none!important}
 @media(max-width:600px){.inquiry-form{padding:19px}.inquiry-grid{grid-template-columns:1fr;gap:0}.inquiry-form button{width:100%;justify-content:center}}
+
+/* FormSubmit AJAX delivery state */
+.inquiry-honeypot{position:absolute!important;left:-10000px!important;width:1px;height:1px;overflow:hidden}
+.inquiry-form button:disabled{opacity:.65;cursor:wait}
+.inquiry-status{min-height:1.5em;margin:14px 0 0;font-size:13px;font-weight:700}
+.inquiry-success{color:#126044}
+.inquiry-error{color:#9d2828}
