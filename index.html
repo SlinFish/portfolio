@@ -96,7 +96,7 @@
     if (!this.reportValidity()) return;
     const values = new FormData(this);
     const fields = [['Name','name'],['Email','email'],['Company','company'],['Service','service'],['Budget','budget'],['Timeline','timeline'],['Project details','details']];
-    const body = fields.map(([label,key]) => label + ': ' + (values.get(key) || 'Not provided')).join('\\n\\n');
+    const body = fields.map(([label,key]) => label + ': ' + (values.get(key) || 'Not provided')).join('\n\n');
     window.location.href = 'mailto:slinfishsoftware@gmail.com?subject=' + encodeURIComponent('Project inquiry — ' + values.get('service')) + '&body=' + encodeURIComponent(body);
   });
   </script>
