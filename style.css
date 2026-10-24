@@ -30,3 +30,15 @@
 .inquiry-status{min-height:1.5em;margin:14px 0 0;font-size:13px;font-weight:700}
 .inquiry-success{color:#126044}
 .inquiry-error{color:#9d2828}
+
+/* Contact section uses .contact-inner label/input rules from the legacy contact design.
+   Explicit, higher-specificity form selectors keep controls in a responsive card. */
+.contact-section .contact-inner .inquiry-form{display:block;width:100%;max-width:790px;margin:30px auto 0;padding:28px;text-align:left;background:#fff;border:1px solid #91d5b0;border-radius:16px;box-shadow:0 12px 35px #0b172514}
+.contact-section .contact-inner .inquiry-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 18px;align-items:start}
+.contact-section .contact-inner .inquiry-form label{display:flex;flex-direction:column;align-items:stretch;gap:7px;width:100%;min-width:0;margin:0 0 18px;text-align:left;font-size:14px;line-height:1.45;font-weight:700;color:#173e32}
+.contact-section .contact-inner .inquiry-form input,.contact-section .contact-inner .inquiry-form select,.contact-section .contact-inner .inquiry-form textarea{display:block;width:100%;max-width:100%;min-width:0;margin:0;padding:12px 13px;border:1px solid #bdd4c8;border-radius:8px;background:#fff;color:#172334;font:inherit;font-size:16px;font-weight:400;line-height:1.4;min-height:46px;box-sizing:border-box}
+.contact-section .contact-inner .inquiry-form textarea{min-height:130px;resize:vertical}
+.contact-section .contact-inner .inquiry-form .inquiry-honeypot{display:none!important}
+.contact-section .contact-inner .inquiry-form button{display:inline-flex;align-items:center;justify-content:center;max-width:100%;font-size:15px}
+.contact-section .contact-inner .inquiry-form .inquiry-note{font-size:12px!important;line-height:1.6;margin:14px 0 0!important;color:#4c6e60!important;text-align:left}
+@media(max-width:640px){.contact-section .contact-inner .inquiry-form{padding:20px 16px;margin-top:24px}.contact-section .contact-inner .inquiry-grid{grid-template-columns:minmax(0,1fr);gap:0}.contact-section .contact-inner .inquiry-form button{width:100%}}
