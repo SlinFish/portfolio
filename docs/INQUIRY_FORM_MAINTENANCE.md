@@ -27,7 +27,7 @@ Fields: name, email, company (optional), service, budget, timeline, details. A h
 6. Verify a test reply can be sent to the supplied sender address.
 7. Check required-field validation, narrow-screen layout, and that service/pricing quote links scroll to `#contact`.
 
-**Current verification status: pending live end-to-end test.** Do not claim that customer inquiries are delivered until steps 3–5 are confirmed.
+**Verification status: passed on 2026-10-24.** A test submission from the mobile website displayed the success message, and a Formspree notification email with subject "New submission from SlinFish Project Inquiry" was received at `slinfishsoftware@gmail.com` on 2026-10-24 at 13:32 Cambodia time. This verifies submission and email delivery for that test; continue monitoring for future failures. Dashboard inspection and reply-to behavior were not independently verified.
 
 ## Troubleshooting
 - Network/cross-origin error: open https://formspree.io/ in the affected browser and check certificate trust. Test on another network if needed; do not bypass TLS warnings.
