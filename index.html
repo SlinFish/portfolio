@@ -74,10 +74,7 @@
 
     <section id="about" class="about-section"><div class="wrap about-grid"><div><p class="kicker">THE PERSON BEHIND THE WORK</p><h2>Small studio.<br><span>Hands-on development.</span></h2></div><div><p>SlinFish Software is an independent development studio led by <strong>Justice Adioha</strong>, an Android and Kotlin Multiplatform developer.</p><p>I work directly on the technical implementation—from application architecture and mobile UI to APIs, data and integrations. Projects are scoped according to what can realistically be delivered.</p><div class="about-links"><a href="https://github.com/SlinFish" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href="developer.html">View developer portfolio ↗</a></div></div></div></section>
 
-    <section id="contact" class="contact-section"><div class="wrap contact-inner"><p class="kicker">HAVE A PROJECT IN MIND?</p><h2>Let's build something<br><em>useful.</em></h2><p>Tell us what you're trying to solve. We'll start with the problem, then work out the right-sized solution.</p><form id="project-inquiry" class="inquiry-form" aria-label="Project inquiry" action="https://formsubmit.co/ajax/slinfishsoftware@gmail.com" method="POST">
-  <input type="hidden" name="_subject" value="New SlinFish Software project inquiry">
-  <input type="hidden" name="_template" value="table">
-  <input type="hidden" name="_url" value="https://slinfish.github.io/portfolio/#contact">
+    <section id="contact" class="contact-section"><div class="wrap contact-inner"><p class="kicker">HAVE A PROJECT IN MIND?</p><h2>Let's build something<br><em>useful.</em></h2><p>Tell us what you're trying to solve. We'll start with the problem, then work out the right-sized solution.</p><form id="project-inquiry" class="inquiry-form" aria-label="Project inquiry" action="https://formspree.io/f/mljjdeyz" method="POST">
   <div class="inquiry-honeypot" aria-hidden="true"><label>Leave this field empty <input name="_honey" tabindex="-1" autocomplete="off"></label></div>
   <div class="inquiry-grid">
     <label>Your name <input name="name" required maxlength="100" autocomplete="name" placeholder="Your name"></label>
@@ -89,7 +86,7 @@
   </div>
   <label>Tell us about your project <textarea name="details" rows="5" required maxlength="3000" placeholder="What isn't working, or what would you like to build?"></textarea></label>
   <button class="btn btn-dark" type="submit">Send project inquiry ↗</button>
-  <p class="inquiry-note">Your inquiry is sent securely to our form provider, FormSubmit, which forwards it to our business email. Please do not include passwords or sensitive account information.</p>
+  <p class="inquiry-note">Your inquiry is submitted to Formspree, which forwards it to our business email. Please do not include passwords or sensitive account information.</p>
   <p id="inquiry-status" class="inquiry-status" role="status" aria-live="polite"></p>
 </form><div class="contact-methods"><a href="tel:+85586903705" aria-label="Call SlinFish Software at +855 86 903 705">☎ Call +855 86 903 705</a><a href="https://wa.me/85586903705?text=Hello%20SlinFish%20Software%2C%20I%27d%20like%20to%20discuss%20a%20project." target="_blank" rel="noopener noreferrer">WhatsApp ↗</a></div><a class="contact-email" href="mailto:slinfishsoftware@gmail.com">slinfishsoftware@gmail.com</a></div></section>
   </main>
@@ -110,19 +107,18 @@
       try {
         const data = new FormData(form);
         if (data.get('_honey')) return;
-        // URL-encoded POST is a simple cross-origin request; unlike application/json,
-        // it does not require a CORS preflight on mobile browsers.
+        // Formspree accepts multipart FormData with Accept: application/json.
         const response = await fetch(form.action, {
           method: 'POST',
           headers: { 'Accept': 'application/json' },
-          body: new URLSearchParams(data)
+          body: data
         });
         const responseText = await response.text();
         let result;
         try { result = JSON.parse(responseText); }
         catch (_) { throw new Error('Unexpected response (HTTP ' + response.status + ')'); }
         // FormSubmit may return HTTP 200 even on failure, and "false" as a string.
-        if (!response.ok || String(result.success).toLowerCase() !== 'true') {
+        if (!response.ok || (result.ok !== true && String(result.success).toLowerCase() !== 'true')) {
           throw new Error(result.message || 'Your inquiry could not be delivered.');
         }
         status.className = 'inquiry-status inquiry-success';
@@ -132,9 +128,9 @@
         status.className = 'inquiry-status inquiry-error';
         const message = String(error.message || '');
         // Never display raw server responses, which may contain submitted form data.
-        const needsActivation = /activation|activate form|confirm your email|verify your email/i.test(message);
+        const needsActivation = /activation|activate form|confirm your email|verify your email|unverified/i.test(message);
         status.textContent = needsActivation
-          ? 'Form activation is pending. Check slinfishsoftware@gmail.com for the FormSubmit activation email, then try again.'
+          ? 'Form verification may be pending. Check the Formspree dashboard and business email, then try again.'
           : 'Submission could not be confirmed. Please use the email or WhatsApp contact option below. (Diagnostic: ' + (/Unexpected response/.test(message) ? 'unexpected provider response' : /Failed to fetch|NetworkError|Load failed/i.test(message) ? 'network or cross-origin error' : 'provider rejection') + ')';
       } finally {
         button.disabled = false;
