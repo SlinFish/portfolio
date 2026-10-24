@@ -108,14 +108,19 @@
       button.disabled = true;
       button.textContent = 'Sending…';
       try {
-        const data = Object.fromEntries(new FormData(form).entries());
-        if (data._honey) return;
+        const data = new FormData(form);
+        if (data.get('_honey')) return;
+        // URL-encoded POST is a simple cross-origin request; unlike application/json,
+        // it does not require a CORS preflight on mobile browsers.
         const response = await fetch(form.action, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-          body: JSON.stringify(data)
+          headers: { 'Accept': 'application/json' },
+          body: new URLSearchParams(data)
         });
-        const result = await response.json();
+        const responseText = await response.text();
+        let result;
+        try { result = JSON.parse(responseText); }
+        catch (_) { throw new Error('Unexpected response (HTTP ' + response.status + ')'); }
         // FormSubmit may return HTTP 200 even on failure, and "false" as a string.
         if (!response.ok || String(result.success).toLowerCase() !== 'true') {
           throw new Error(result.message || 'Your inquiry could not be delivered.');
@@ -126,9 +131,11 @@
       } catch (error) {
         status.className = 'inquiry-status inquiry-error';
         const message = String(error.message || '');
-        status.textContent = /activation|activate form/i.test(message)
-          ? 'Our inquiry inbox is awaiting one-time activation. Please email us directly at slinfishsoftware@gmail.com until activation is complete.'
-          : 'We could not confirm delivery. Please try again later or contact slinfishsoftware@gmail.com directly.';
+        // Never display raw server responses, which may contain submitted form data.
+        const needsActivation = /activation|activate form|confirm your email|verify your email/i.test(message);
+        status.textContent = needsActivation
+          ? 'Form activation is pending. Check slinfishsoftware@gmail.com for the FormSubmit activation email, then try again.'
+          : 'Submission could not be confirmed. Please use the email or WhatsApp contact option below. (Diagnostic: ' + (/Unexpected response/.test(message) ? 'unexpected provider response' : /Failed to fetch|NetworkError|Load failed/i.test(message) ? 'network or cross-origin error' : 'provider rejection') + ')';
       } finally {
         button.disabled = false;
         button.textContent = 'Send project inquiry ↗';
