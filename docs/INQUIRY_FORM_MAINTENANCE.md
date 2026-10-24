@@ -16,7 +16,7 @@ Updated: 2026-10-24
 ## Submission behavior
 The browser validates required fields and posts `FormData` using `fetch` to Formspree with `Accept: application/json`. The submit button is disabled while sending. Only a successful HTTP response with a recognized success value results in a success message; errors show a failure message. No redirect to Apple Mail is required.
 
-Fields: name, email, company (optional), service, budget, timeline, details. A hidden `_honey` anti-spam field is included. Formspree may have its own spam filtering; confirm provider behavior in the dashboard.
+Fields: name, email, company (optional), service, budget, timeline, stage, details. A hidden `_honey` anti-spam field is included. Formspree may have its own spam filtering; confirm provider behavior in the dashboard.
 
 ## Setup and verification
 1. Sign in to the Formspree account associated with `slinfishsoftware@gmail.com`.
@@ -53,3 +53,18 @@ To roll back this integration, revert the Formspree migration PR or replace the 
 - Revalidate after endpoint, email, DNS, or privacy-policy changes.
 - Log qualified inquiries manually into the commercial pipeline after reviewing them.
 - Document any future provider migration and preserve the field names for reporting.
+
+## Lead qualification and service positioning (2026-10-24)
+The homepage prioritizes three entry services: Android fixes/maintenance, backend/API integrations, and workflow automation. Custom app and software MVPs remain a fourth offer; the studio is not limited to those services. The pricing section clarifies that pilots are paid and scoped before work starts.
+
+The inquiry form adds a required `stage` select. Existing Formspree endpoint and notification destination remain unchanged. After deployment, send a clearly labeled test to ensure the new field arrives in Formspree and Gmail. Keep the contact experience short; avoid asking visitors to upload credentials or confidential files.
+
+### Manual lead qualification workflow
+1. Review the service, project stage, problem statement, timeline and budget; verify that a real reply address is present.
+2. Mark **Qualified** when the request is specific enough to discuss, appears feasible with available capacity, and has a plausible budget or a willingness to scope a paid pilot. Otherwise mark **Needs clarification**, **Not a fit**, or **Spam**.
+3. For qualified leads, reply with 2–3 specific questions and propose a short discovery call or a written fixed-scope pilot. Do not promise price or start date before reviewing the requirements.
+4. Record the inquiry in the existing sales pipeline, including received date, service, stage, budget range, next action, owner and follow-up date. Avoid storing private customer details in public GitHub issues.
+5. For unqualified but legitimate inquiries, offer an appropriately scoped alternative or decline politely. Do not count automated messages or test submissions as sales leads.
+
+### Maintenance checks
+Confirm service buttons still navigate to `#contact`, the required `stage` field validates on mobile, and Formspree email contains the new field. The provider's free-tier limits and privacy policy should be reviewed periodically.
