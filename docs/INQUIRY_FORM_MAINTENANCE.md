@@ -65,3 +65,10 @@ Provider documentation: https://formsubmit.co/documentation and https://formsubm
 
 ## Mobile layout regression (2026-10-24)
 A user screenshot showed the form fields compressed into inline rows and the honeypot visible on iPhone. The cause was existing contact-section styling overriding generic `.inquiry-form` CSS selectors. A higher-specificity set of selectors scoped to `.contact-section .contact-inner .inquiry-form` now explicitly sets block inputs, stacked labels, a responsive single-column grid below 640px, and `display:none!important` for the honeypot. Do not remove this override without checking the legacy contact CSS. Check mobile Safari after future stylesheet changes. This fixes CSS only; submission still requires separate FormSubmit email activation and delivery verification.
+
+## Failed live submission diagnosis (2026-10-24)
+An iPhone screenshot showed a red generic delivery error after a test submission. Searches of the connected business Gmail inbox and Spam found no FormSubmit activation or inquiry messages. The failure cause was not conclusively established; provider activation, CORS/preflight, and provider rejection were possible.
+
+The AJAX request was updated from JSON `Content-Type: application/json` to a URL-encoded `URLSearchParams(FormData)` request with `Accept: application/json`. This is a CORS-simple POST that avoids a JSON preflight; it does **not** guarantee delivery. The page now classifies errors as activation, network/cross-origin, unexpected provider response, or provider rejection without exposing raw server messages or personal details. Never treat an unsuccessful response as delivered.
+
+**Verification required:** After GitHub Pages publishes, submit one clearly marked test from mobile. Note the exact diagnostic shown. Check business inbox and Spam for activation or test email. If no activation email arrives, consider a normal POST activation flow or a different form service after investigating the provider; do not repeatedly submit real customer information. This patch is a diagnostic improvement, not proof of operational delivery.
