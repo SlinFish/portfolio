@@ -12,3 +12,14 @@
 .contact-methods a:hover{background:#eafff3}
 .contact-methods .telegram-pending{opacity:.65;border-style:dashed;cursor:default}
 @media(max-width:500px){.work-copy>a.demo-button{width:100%;justify-content:center}.contact-methods{flex-direction:column}.contact-methods a,.contact-methods span{justify-content:center}}
+
+/* Structured inquiry: lightweight and responsive, no external form service */
+.inquiry-form{max-width:790px;margin:30px auto 0;text-align:left;background:#ffffff;border:1px solid #91d5b0;border-radius:16px;padding:28px;box-shadow:0 12px 35px #0b172514}
+.inquiry-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:17px}
+.inquiry-form label{display:flex;flex-direction:column;gap:7px;font-size:13px;font-weight:750;color:#173e32;margin-bottom:17px}
+.inquiry-form input,.inquiry-form select,.inquiry-form textarea{width:100%;border:1px solid #bdd4c8;border-radius:8px;padding:12px 13px;background:#fff;color:#172334;font:inherit;font-weight:400;min-height:46px}
+.inquiry-form textarea{resize:vertical;min-height:120px}
+.inquiry-form input:focus,.inquiry-form select:focus,.inquiry-form textarea:focus{outline:2px solid #218c69;outline-offset:2px}
+.inquiry-form button{border:0;cursor:pointer}
+.inquiry-note{font-size:12px!important;color:#4c6e60!important;margin:14px 0 0!important;max-width:none!important}
+@media(max-width:600px){.inquiry-form{padding:19px}.inquiry-grid{grid-template-columns:1fr;gap:0}.inquiry-form button{width:100%;justify-content:center}}
