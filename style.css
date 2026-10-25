@@ -98,3 +98,19 @@
   .hotel-preview img{height:175px}
   .hotel-copy,.fitness-copy{padding:20px 22px}
 }
+
+
+/* Equal-height desktop cards: hotel card is the reference */
+@media(min-width:761px){
+ .work-grid{grid-template-rows:440px 440px;align-items:stretch}
+ .work-grid>.work-card{height:440px;min-height:0;max-height:440px;overflow:hidden}
+ .work-main{height:440px;min-height:0}
+ .work-main .work-visual{height:440px;min-height:0}
+ .hotel-card,.fitness-card{height:440px;min-height:0;align-self:stretch}
+ .hotel-copy,.fitness-copy{flex:1;min-height:0;display:flex;flex-direction:column}
+ .hotel-links{margin-top:auto;padding-top:12px}
+}
+@media(max-width:760px){
+ .work-grid{grid-template-rows:none;align-items:start}
+ .work-grid>.work-card{height:auto;max-height:none}
+}
