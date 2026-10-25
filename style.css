@@ -63,3 +63,32 @@
 .hotel-links a:focus-visible{outline:2px solid #137b5a;outline-offset:4px}
 @media(max-width:500px){.hotel-copy{padding:24px}.hotel-preview{height:190px}}
 @media(prefers-reduced-motion:reduce){.hotel-preview img{transition:none}.hotel-preview:hover img{transform:none}}
+
+
+/* Selected Work: deliberate feature + two balanced secondary cards */
+.work-grid{grid-template-columns:repeat(2,minmax(0,1fr));align-items:stretch}
+.work-main{grid-column:1/-1;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);min-height:390px}
+.work-main .work-copy{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding:38px 42px}
+.work-main .work-copy h3{margin:24px 0 12px}
+.work-main .work-visual{min-height:390px}
+.hotel-card,.fitness-card{min-width:0;align-self:stretch}
+.hotel-preview{height:235px;min-height:0;flex:none}
+.hotel-preview img{object-fit:cover}
+.hotel-preview-label{display:inline-block;bottom:14px;left:16px;background:#0b1725e8;color:white}
+.hotel-copy{padding:26px 30px 30px}
+.hotel-copy h3{margin:16px 0 10px}
+.fitness-art{height:235px;flex:none}
+.fitness-copy{padding:26px 30px 30px}
+.fitness-copy h3{margin:16px 0 10px}
+@media(max-width:760px){
+  .work-grid{grid-template-columns:1fr}
+  .work-main{grid-column:auto;grid-template-columns:1fr}
+  .work-main .work-copy{padding:28px}
+  .work-main .work-visual{height:230px;min-height:230px}
+  .hotel-preview,.fitness-art{height:210px}
+}
+@media(max-width:500px){
+  .work-main .work-copy{padding:24px}
+  .hotel-copy,.fitness-copy{padding:24px}
+  .hotel-preview,.fitness-art{height:190px}
+}
