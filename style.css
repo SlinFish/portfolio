@@ -65,30 +65,52 @@
 @media(prefers-reduced-motion:reduce){.hotel-preview img{transition:none}.hotel-preview:hover img{transform:none}}
 
 
-/* Selected Work: deliberate feature + two balanced secondary cards */
-.work-grid{grid-template-columns:repeat(2,minmax(0,1fr));align-items:stretch}
-.work-main{grid-column:1/-1;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);min-height:390px}
-.work-main .work-copy{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding:38px 42px}
-.work-main .work-copy h3{margin:24px 0 12px}
-.work-main .work-visual{min-height:390px}
-.hotel-card,.fitness-card{min-width:0;align-self:stretch}
-.hotel-preview{height:235px;min-height:0;flex:none}
-.hotel-preview img{object-fit:cover}
-.hotel-preview-label{display:inline-block;bottom:14px;left:16px;background:#0b1725e8;color:white}
-.hotel-copy{padding:26px 30px 30px}
-.hotel-copy h3{margin:16px 0 10px}
-.fitness-art{height:235px;flex:none}
-.fitness-copy{padding:26px 30px 30px}
-.fitness-copy h3{margin:16px 0 10px}
+/* Selected Work — compact showcase; intentionally bounded visuals */
+.work-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;align-items:start}
+.work-grid>.work-card{min-width:0;min-height:0}
+.work-main{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);height:320px;min-height:0}
+.work-main .work-copy{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding:28px 36px;min-width:0}
+.work-main .work-copy h3{margin:14px 0 8px;font-size:34px}
+.work-main .work-copy p{margin:0;max-width:580px}
+.work-main .work-copy .work-tech{margin:12px 0}
+.work-main .work-copy>a.demo-button{margin-top:6px;padding:12px 17px;font-size:13px;min-height:0}
+.work-main .work-visual{height:320px;min-height:0;overflow:hidden}
+.work-main .route-map{height:82%;width:90%}
+.hotel-card,.fitness-card{display:flex;flex-direction:column;align-self:start;height:auto;min-height:0}
+.hotel-preview,.fitness-art{display:block;height:185px;min-height:0;max-height:185px;flex:0 0 185px;overflow:hidden}
+.hotel-preview img{display:block;width:100%;height:185px;object-fit:cover}
+.hotel-preview-label{bottom:12px;left:14px}
+.fitness-art{display:flex;align-items:center;justify-content:center}
+.fitness-ring{width:115px;height:115px}
+.fitness-ring>span{width:93px;height:93px;font-size:30px}
+.hotel-copy,.fitness-copy{padding:20px 24px 23px}
+.hotel-copy h3,.fitness-copy h3{font-size:27px;margin:10px 0 8px}
+.hotel-copy p,.fitness-copy p{margin:0}
+.hotel-copy .work-tech,.fitness-copy .work-tech{margin:12px 0}
+.hotel-links{margin-top:8px}
 @media(max-width:760px){
-  .work-grid{grid-template-columns:1fr}
-  .work-main{grid-column:auto;grid-template-columns:1fr}
-  .work-main .work-copy{padding:28px}
-  .work-main .work-visual{height:230px;min-height:230px}
-  .hotel-preview,.fitness-art{height:210px}
-}
-@media(max-width:500px){
+  .work-grid{grid-template-columns:minmax(0,1fr);gap:15px}
+  .work-main{grid-column:auto;grid-template-columns:minmax(0,1fr);height:auto}
   .work-main .work-copy{padding:24px}
-  .hotel-copy,.fitness-copy{padding:24px}
-  .hotel-preview,.fitness-art{height:190px}
+  .work-main .work-visual{height:190px;min-height:190px}
+  .work-main .work-copy h3{font-size:31px}
+  .hotel-preview,.fitness-art{height:175px;max-height:175px;flex-basis:175px}
+  .hotel-preview img{height:175px}
+  .hotel-copy,.fitness-copy{padding:20px 22px}
+}
+
+
+/* Equal-height desktop cards: hotel card is the reference */
+@media(min-width:761px){
+ .work-grid{grid-template-rows:440px 440px;align-items:stretch}
+ .work-grid>.work-card{height:440px;min-height:0;max-height:440px;overflow:hidden}
+ .work-main{height:440px;min-height:0}
+ .work-main .work-visual{height:440px;min-height:0}
+ .hotel-card,.fitness-card{height:440px;min-height:0;align-self:stretch}
+ .hotel-copy,.fitness-copy{flex:1;min-height:0;display:flex;flex-direction:column}
+ .hotel-links{margin-top:auto;padding-top:12px}
+}
+@media(max-width:760px){
+ .work-grid{grid-template-rows:none;align-items:start}
+ .work-grid>.work-card{height:auto;max-height:none}
 }
