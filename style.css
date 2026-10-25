@@ -42,3 +42,24 @@
 .contact-section .contact-inner .inquiry-form button{display:inline-flex;align-items:center;justify-content:center;max-width:100%;font-size:15px}
 .contact-section .contact-inner .inquiry-form .inquiry-note{font-size:12px!important;line-height:1.6;margin:14px 0 0!important;color:#4c6e60!important;text-align:left}
 @media(max-width:640px){.contact-section .contact-inner .inquiry-form{padding:20px 16px;margin-top:24px}.contact-section .contact-inner .inquiry-grid{grid-template-columns:minmax(0,1fr);gap:0}.contact-section .contact-inner .inquiry-form button{width:100%}}
+
+
+/* The Aster House: hospitality concept project */
+.hotel-card{display:flex;flex-direction:column;min-width:0}
+.hotel-preview{display:block;position:relative;min-height:188px;height:188px;overflow:hidden;background:#173b34}
+.hotel-preview img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .3s ease}
+.hotel-preview:hover img{transform:scale(1.04)}
+.hotel-preview:focus-visible{outline:3px solid #137b5a;outline-offset:-3px}
+.hotel-preview-label{position:absolute;bottom:14px;left:17px;padding:7px 10px;border-radius:6px;background:#0b1725e8;color:#fff;font-size:10px;font-weight:850;letter-spacing:.7px}
+.hotel-copy{display:flex;flex:1;flex-direction:column;padding:25px 30px 30px}
+.hotel-concept{font-size:9px;font-weight:850;letter-spacing:.8px;color:#697781;text-align:right}
+.hotel-copy h3{font-size:31px;letter-spacing:-1.2px;margin:18px 0 10px}
+.hotel-copy p{margin:0}
+.hotel-copy .work-tech{margin:17px 0 20px}
+.hotel-links{display:flex;flex-wrap:wrap;gap:12px 18px;margin-top:auto;align-items:center}
+.hotel-links a{font-size:12px;font-weight:850;text-decoration:underline;text-underline-offset:3px}
+.hotel-live-link{color:#0d7657}
+.hotel-source-link{color:#3c4c5a}
+.hotel-links a:focus-visible{outline:2px solid #137b5a;outline-offset:4px}
+@media(max-width:500px){.hotel-copy{padding:24px}.hotel-preview{height:190px}}
+@media(prefers-reduced-motion:reduce){.hotel-preview img{transition:none}.hotel-preview:hover img{transform:none}}
