@@ -114,3 +114,23 @@
  .work-grid{grid-template-rows:none;align-items:start}
  .work-grid>.work-card{height:auto;max-height:none}
 }
+
+/* Compact services and a distinct, actionable Android investigation offer. */
+@media(min-width:1101px){
+ .service-grid{grid-template-columns:repeat(6,minmax(0,1fr))}
+ .service-grid>.service-card{grid-column:span 2;min-height:0}
+ .service-grid>.service-card:nth-child(n+4){grid-column:span 3}
+}
+.service-grid>.service-card{min-width:0}
+.android-offer{display:flex;align-items:center;justify-content:space-between;gap:32px;margin-top:20px;padding:26px 30px;border-radius:14px;background:var(--navy);color:#fff}
+.android-offer-copy{max-width:680px;min-width:0}
+.android-offer .kicker{color:var(--mint);font-size:10px;margin:0 0 8px}
+.android-offer h3{font-size:23px;line-height:1.3;letter-spacing:-.5px;margin:0 0 10px}
+.android-offer h3 span{display:inline-block;color:var(--mint);margin-left:8px}
+.android-offer-copy>p:last-child{color:#b8c8d1;font-size:13px;line-height:1.7;margin:0}
+.android-offer-actions{display:flex;flex-direction:column;align-items:center;gap:10px;flex-shrink:0}
+.android-offer-actions .btn{font-size:13px;white-space:nowrap}
+.android-offer-question{color:var(--mint);font-size:12px;font-weight:750;text-decoration:underline;text-underline-offset:3px}
+.android-offer-actions small{font-size:10px;color:#b8c8d1}
+.android-offer a:focus-visible{outline:3px solid #fff;outline-offset:4px}
+@media(max-width:760px){.android-offer{align-items:stretch;flex-direction:column;gap:20px;padding:24px}.android-offer-actions{align-items:flex-start}.android-offer-actions .btn{width:100%;white-space:normal}.android-offer h3{font-size:21px}}
