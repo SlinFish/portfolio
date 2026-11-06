@@ -136,7 +136,12 @@
   (() => {
     const form = document.getElementById('project-inquiry');
     const discovery = document.getElementById('discovery');
-    const openDiscovery = () => { if (location.hash === '#discovery') discovery.open = true; };
+    const openDiscovery = () => {
+      if (location.hash === '#discovery') {
+        discovery.open = true;
+        requestAnimationFrame(() => discovery.scrollIntoView({ block: 'start' }));
+      }
+    };
     openDiscovery();
     window.addEventListener('hashchange', openDiscovery);
     const keys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
